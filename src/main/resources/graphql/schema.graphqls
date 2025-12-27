@@ -1,0 +1,27 @@
+type User {
+    id: ID!
+    email: String!
+    name: String!
+    orders: [Order!]!
+}
+
+type Product {
+    id: ID!
+    name: String!
+    price: Float!
+}
+
+type Order {
+    id: ID!
+    createdAt: String!
+    user: User!
+    products: [Product!]!
+}
+
+type Query {
+    ordersByUser(userId: ID!): [Order!]!
+}
+
+type Mutation {
+    createOrder(userId: ID!, productIds: [ID!]!): Order!
+}
