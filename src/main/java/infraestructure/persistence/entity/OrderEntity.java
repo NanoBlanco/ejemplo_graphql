@@ -3,6 +3,8 @@ package infraestructure.persistence.entity;
 import jakarta.persistence.*;
 
 import java.time.Instant;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "orders")
@@ -19,7 +21,7 @@ public class OrderEntity {
     private Instant createdAt;
 
     @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<OrderProductEntity> products;
+    private Set<OrderProductEntity> products = new HashSet<>();
 
     protected OrderEntity() {}
 
