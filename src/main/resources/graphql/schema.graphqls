@@ -25,3 +25,7 @@ type Query {
 type Mutation {
     createOrder(userId: ID!, productIds: [ID!]!): Order!
 }
+
+type Subscription {
+    orderCreated: Order
+}

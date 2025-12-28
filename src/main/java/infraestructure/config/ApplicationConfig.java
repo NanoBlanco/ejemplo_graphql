@@ -2,6 +2,7 @@ package infraestructure.config;
 
 import application.command.port.CreateOrderCommand;
 import application.command.usecase.CreateOrderUseCase;
+import application.event.port.OrderEventPublisher;
 import application.query.port.GetOrdersByUserQuery;
 import application.query.port.GetProductsByIdsQuery;
 import application.query.usecase.GetOrdersByUserUseCase;
@@ -15,8 +16,8 @@ import org.springframework.context.annotation.Configuration;
 public class ApplicationConfig {
 
     @Bean
-    CreateOrderCommand createOrderCommand(OrderRepository orderRepository) {
-        return new CreateOrderUseCase(orderRepository);
+    CreateOrderCommand createOrderCommand(OrderRepository orderRepository, OrderEventPublisher eventPublisher) {
+        return new CreateOrderUseCase(orderRepository, eventPublisher);
     }
 
     @Bean

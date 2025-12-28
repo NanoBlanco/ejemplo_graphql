@@ -8,4 +8,7 @@ public record OrderGql(
         Long userId,
         List<Long> productsIds
 ) {
+    public static OrderGql fromId(Long orderId) {
+        return new OrderGql(orderId, null, null, List.of());
+    }
 }
