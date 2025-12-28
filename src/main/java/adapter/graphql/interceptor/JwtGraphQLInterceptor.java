@@ -21,22 +21,29 @@ public class JwtGraphQLInterceptor implements WebGraphQlInterceptor {
             WebGraphQlRequest request,
             Chain chain) {
 
-        String authHeader =
-                request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
-
         UserContext userContext = null;
 
-        if (authHeader != null && authHeader.startsWith("Bearer ")) {
-            String token = authHeader.substring(7);
-            userContext = jwtValidator.validate(token);
+        try {
+            String authHeader =
+                request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
+
+            if (authHeader != null && authHeader.startsWith("Bearer ")) {
+                String token = authHeader.substring(7);
+                userContext = jwtValidator.validate(token);
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
 
-        return chain.next(
-                request.configureExecutionInput((execInput, builder) ->
-                        builder.graphQLContext(ctx ->
-                                ctx.put("userContext", userContext)
-                        ).build()
-                )
-        );
+        final UserContext resolvedUserContext = userContext;
+
+        request.configureExecutionInput((executionInput, builder) -> {
+            builder.graphQLContext(ctx ->
+                    ctx.put("userContext", resolvedUserContext)
+            );
+            return builder.build();
+        });
+
+        return chain.next(request);
     }
 }

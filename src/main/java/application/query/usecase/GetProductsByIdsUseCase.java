@@ -9,14 +9,14 @@ import java.util.List;
 
 public class GetProductsByIdsUseCase implements GetProductsByIdsQuery {
 
-    private final ProductRepository productRepository;
+    private final ProductRepository repository;
 
     public GetProductsByIdsUseCase(ProductRepository productRepository) {
-        this.productRepository = productRepository;
+        this.repository = productRepository;
     }
 
     @Override
     public List<Product> execute(List<Long> productIds) {
-        return List.of();
+        return repository.findByIds(productIds);
     }
 }
