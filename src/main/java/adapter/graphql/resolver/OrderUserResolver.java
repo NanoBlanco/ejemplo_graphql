@@ -1,5 +1,6 @@
-package adapter.graphql;
+package adapter.graphql.resolver;
 
+import adapter.graphql.DataLoaderNames;
 import domain.model.Order;
 import domain.model.User;
 import graphql.schema.DataFetchingEnvironment;
