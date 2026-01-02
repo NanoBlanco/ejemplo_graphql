@@ -12,4 +12,12 @@ public class ProductMapper {
                 entity.getPrice()
         );
     }
+
+    public static ProductEntity toEntity(Product product) {
+        ProductEntity entity = new ProductEntity();
+        entity.setId(product.getId());
+        entity.setName(product.getName());
+        entity.setPrice(product.getPrice());
+        return entity;
+    }
 }

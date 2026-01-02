@@ -3,6 +3,7 @@ package com.rbservicios.demo_graphQL.application.command.usecase;
 import com.rbservicios.demo_graphQL.application.command.port.CreateProductCommand;
 import com.rbservicios.demo_graphQL.domain.model.Product;
 import com.rbservicios.demo_graphQL.domain.repository.ProductRepository;
+import org.springframework.stereotype.Controller;
 
 import java.math.BigDecimal;
 

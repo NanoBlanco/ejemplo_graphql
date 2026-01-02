@@ -2,9 +2,9 @@ package com.rbservicios.demo_graphQL.domain.model;
 
 public class User {
 
-    private final Long id;
-    private final String email;
-    private final String name;
+    private Long id;
+    private String email;
+    private String name;
 
     public User(Long id, String email, String name) {
         this.id = id;
@@ -16,4 +16,11 @@ public class User {
     public String getEmail() { return email; }
     public String getName() { return name; }
 
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

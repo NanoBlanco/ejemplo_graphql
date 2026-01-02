@@ -1,6 +1,6 @@
 package com.rbservicios.demo_graphQL.adapter.graphql.interceptor;
 
-import com.rbservicios.demo_graphQL.adapter.graphql.context.UserContext;
+import com.rbservicios.demo_graphQL.application.security.UserContext;
 import com.rbservicios.demo_graphQL.application.security.JwtValidator;
 import org.springframework.graphql.server.WebGraphQlInterceptor;
 import org.springframework.graphql.server.WebGraphQlRequest;
@@ -8,6 +8,8 @@ import org.springframework.graphql.server.WebGraphQlResponse;
 import org.springframework.http.HttpHeaders;
 import org.springframework.stereotype.Component;
 import reactor.core.publisher.Mono;
+
+import java.util.Optional;
 
 @Component
 public class JwtGraphQLInterceptor implements WebGraphQlInterceptor {
@@ -23,9 +25,8 @@ public class JwtGraphQLInterceptor implements WebGraphQlInterceptor {
             WebGraphQlRequest request,
             Chain chain) {
 
-        UserContext userContext = null;
+        Optional<UserContext> userContext = Optional.empty();
 
-        try {
             String authHeader =
                 request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
@@ -33,15 +34,15 @@ public class JwtGraphQLInterceptor implements WebGraphQlInterceptor {
                 String token = authHeader.substring(7);
                 userContext = jwtValidator.validate(token);
             }
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
 
-        final UserContext resolvedUserContext = userContext;
+        Optional<UserContext> finalUserContext = userContext;
 
         request.configureExecutionInput((executionInput, builder) -> {
-            builder.graphQLContext(ctx ->
-                    ctx.put("userContext", resolvedUserContext)
+            builder.graphQLContext(ctx -> {
+                        finalUserContext.ifPresent(uc -> ctx.put("userContext", uc)
+                        );
+                    }
+
             );
             return builder.build();
         });

@@ -6,10 +6,11 @@ import com.rbservicios.demo_graphQL.adapter.graphql.model.UserGql;
 import org.dataloader.DataLoader;
 import org.springframework.graphql.data.method.annotation.SchemaMapping;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@Component
+@Controller
 public class OrderFieldResolver {
 
     @SchemaMapping(typeName = "Order", field = "user")

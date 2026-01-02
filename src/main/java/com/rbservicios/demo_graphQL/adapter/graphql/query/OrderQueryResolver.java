@@ -1,6 +1,6 @@
 package com.rbservicios.demo_graphQL.adapter.graphql.query;
 
-import com.rbservicios.demo_graphQL.adapter.graphql.context.UserContext;
+import com.rbservicios.demo_graphQL.application.security.UserContext;
 import com.rbservicios.demo_graphQL.adapter.graphql.mapper.OrderGqlMapper;
 import com.rbservicios.demo_graphQL.adapter.graphql.model.OrderGql;
 import com.rbservicios.demo_graphQL.adapter.graphql.resolver.BaseGraphQLResolver;
@@ -10,10 +10,11 @@ import graphql.schema.DataFetchingEnvironment;
 import org.springframework.graphql.data.method.annotation.Argument;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
-@Component
+@Controller
 public class OrderQueryResolver extends BaseGraphQLResolver {
 
     private final GetOrdersByUserQuery query;

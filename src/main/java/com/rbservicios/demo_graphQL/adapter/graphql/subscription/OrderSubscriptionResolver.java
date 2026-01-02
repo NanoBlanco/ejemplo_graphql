@@ -1,6 +1,6 @@
 package com.rbservicios.demo_graphQL.adapter.graphql.subscription;
 
-import com.rbservicios.demo_graphQL.adapter.graphql.context.UserContext;
+import com.rbservicios.demo_graphQL.application.security.UserContext;
 import com.rbservicios.demo_graphQL.adapter.graphql.model.OrderGql;
 import com.rbservicios.demo_graphQL.adapter.graphql.resolver.BaseGraphQLResolver;
 import graphql.GraphQLException;

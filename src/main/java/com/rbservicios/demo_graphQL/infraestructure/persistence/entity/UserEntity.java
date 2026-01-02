@@ -16,7 +16,7 @@ public class UserEntity {
     @Column(nullable = false)
     private String name;
 
-    protected UserEntity() {}
+    public UserEntity() {}
 
     public UserEntity(String email, String name) {
         this.email = email;
@@ -26,4 +26,16 @@ public class UserEntity {
     public Long getId() { return id; }
     public String getEmail() { return email; }
     public String getName() { return name; }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

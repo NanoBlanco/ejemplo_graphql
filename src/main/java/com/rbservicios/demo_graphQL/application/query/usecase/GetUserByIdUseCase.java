@@ -4,6 +4,8 @@ import com.rbservicios.demo_graphQL.application.query.port.GetUserByIdQuery;
 import com.rbservicios.demo_graphQL.domain.model.User;
 import com.rbservicios.demo_graphQL.domain.repository.UserRepository;
 
+import java.util.List;
+
 public class GetUserByIdUseCase implements GetUserByIdQuery {
 
     private final UserRepository repository;
@@ -14,6 +16,7 @@ public class GetUserByIdUseCase implements GetUserByIdQuery {
 
     @Override
     public User execute(Long id) {
-        return repository.findById(id);
+        return repository.findById(id).orElse(null);
     }
+
 }

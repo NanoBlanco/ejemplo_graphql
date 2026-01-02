@@ -19,12 +19,22 @@ type Order {
 
 type Query {
     ordersByUser(userId: ID!): [Order!]!
+    userById(id: ID!): User
+    users: [User!]!
+    productById(id: ID!): Product
+    products: [Product!]!
 }
 
 type Mutation {
     createUser(email: String!, name: String!): User!
+    updateUser(id: ID!, email: String, name: String): User
+    deleteUser(id: ID!): Boolean
     createProduct(name: String!, price: Float!): Product!
-    createOrder(userId: ID!, productIds: [ID!]!): Order!
+    updateProduct(id: ID!, name: String, price: Float): Product
+    deleteProduct(id: ID!): Boolean
+    createOrder(productIds: [ID!]!): Order!
+
+    login(userId: ID!): String!
 }
 
 type Subscription {

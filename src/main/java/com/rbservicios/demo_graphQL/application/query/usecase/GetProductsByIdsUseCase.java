@@ -17,6 +17,6 @@ public class GetProductsByIdsUseCase implements GetProductsByIdsQuery {
 
     @Override
     public List<Product> execute(List<Long> productIds) {
-        return repository.findByIds(productIds);
+        return repository.findByIdIn(productIds);
     }
 }

@@ -1,6 +1,6 @@
 package com.rbservicios.demo_graphQL.adapter.graphql.resolver;
 
-import com.rbservicios.demo_graphQL.adapter.graphql.context.UserContext;
+import com.rbservicios.demo_graphQL.application.security.UserContext;
 import graphql.schema.DataFetchingEnvironment;
 
 public abstract class BaseGraphQLResolver {

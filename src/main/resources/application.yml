@@ -20,9 +20,9 @@ spring:
     graphiql:
       enabled: true
 
-  security:
-    jwt:
-      secret: my-super-secret-key-which-is-at-least-32-bytes
+security:
+  jwt:
+    secret: my-super-secret-key-which-is-at-least-32-bytes
 
 flyway:
   enabled: true

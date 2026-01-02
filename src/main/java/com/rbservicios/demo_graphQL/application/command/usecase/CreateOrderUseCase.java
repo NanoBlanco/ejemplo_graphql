@@ -4,6 +4,8 @@ import com.rbservicios.demo_graphQL.application.command.port.CreateOrderCommand;
 import com.rbservicios.demo_graphQL.application.event.port.OrderEventPublisher;
 import com.rbservicios.demo_graphQL.domain.model.Order;
 import com.rbservicios.demo_graphQL.domain.repository.OrderRepository;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
 
 import java.time.Instant;
 import java.util.List;

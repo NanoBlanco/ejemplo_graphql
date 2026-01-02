@@ -22,7 +22,7 @@ public class OrderProductEntity {
     public OrderProductEntity(OrderEntity order, ProductEntity product) {
         this.order = order;
         this.product = product;
-        this.id = new OrderProductId(order.getId(), product.getId());
+        //this.id = new OrderProductId(order.getId(), product.getId());
     }
 
     public ProductEntity getProduct() {

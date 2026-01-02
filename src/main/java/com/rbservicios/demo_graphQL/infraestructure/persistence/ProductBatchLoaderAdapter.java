@@ -16,7 +16,7 @@ public class ProductBatchLoaderAdapter implements LoadProductsByIdsPort {
 
     private final ProductJpaRepository repository;
 
-    public ProductBatchLoaderAdapter(ProductJpaRepository repository, ProductMapper mapper) {
+    public ProductBatchLoaderAdapter(ProductJpaRepository repository) {
         this.repository = repository;
     }
 

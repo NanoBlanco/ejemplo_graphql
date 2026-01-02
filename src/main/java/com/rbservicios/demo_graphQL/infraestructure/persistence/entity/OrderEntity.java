@@ -30,6 +30,11 @@ public class OrderEntity {
         this.createdAt = createdAt;
     }
 
+    public void addProduct(ProductEntity product) {
+        OrderProductEntity op = new OrderProductEntity(this, product);
+        products.add(op);
+    }
+
     public Long getId() { return id; }
     public Long getUserId() { return userId; }
     public Instant getCreatedAt() { return createdAt; }
