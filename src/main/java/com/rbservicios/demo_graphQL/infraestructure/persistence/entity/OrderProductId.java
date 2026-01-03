@@ -1,10 +1,18 @@
 package com.rbservicios.demo_graphQL.infraestructure.persistence.entity;
 
-import java.io.Serializable;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embeddable;
 
+import java.io.Serializable;
+import java.util.Objects;
+
+@Embeddable
 public class OrderProductId implements Serializable {
 
+    @Column(name = "order_id")
     private Long orderId;
+
+    @Column(name = "product_id")
     private Long productId;
 
     protected OrderProductId() {}
@@ -14,18 +22,32 @@ public class OrderProductId implements Serializable {
         this.productId = productId;
     }
 
+    public Long getOrderId() {
+        return orderId;
+    }
+
+    public Long getProductId() {
+        return productId;
+    }
+
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
+    }
+
+    public void setProductId(Long productId) {
+        this.productId = productId;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-
-        OrderProductId that = (OrderProductId) o;
-        return orderId.equals(that.orderId) && productId.equals(that.productId);
+        if (this == o) return true;
+        if (!(o instanceof OrderProductId that)) return false;
+        return Objects.equals(orderId, that.orderId)
+                && Objects.equals(productId, that.productId);
     }
 
     @Override
     public int hashCode() {
-        int result = orderId.hashCode();
-        result = 31 * result + productId.hashCode();
-        return result;
+        return Objects.hash(orderId, productId);
     }
 }

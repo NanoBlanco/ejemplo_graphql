@@ -2,7 +2,6 @@ package com.rbservicios.demo_graphQL.adapter.graphql.mutation;
 
 import com.rbservicios.demo_graphQL.adapter.graphql.mapper.ProductGqlMapper;
 import com.rbservicios.demo_graphQL.adapter.graphql.model.ProductGql;
-import com.rbservicios.demo_graphQL.adapter.graphql.resolver.BaseGraphQLResolver;
 import com.rbservicios.demo_graphQL.application.command.port.CreateProductCommand;
 import com.rbservicios.demo_graphQL.application.command.port.DeleteProductCommand;
 import com.rbservicios.demo_graphQL.application.command.port.UpdateProductCommand;
@@ -15,7 +14,7 @@ import org.springframework.stereotype.Controller;
 import java.math.BigDecimal;
 
 @Controller
-public class ProductMutationResolver extends BaseGraphQLResolver {
+public class ProductMutationResolver {
 
     private final CreateProductCommand command;
     private final UpdateProductCommand updateCommand;

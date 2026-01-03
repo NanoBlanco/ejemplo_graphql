@@ -2,6 +2,9 @@ package com.rbservicios.demo_graphQL.adapter.graphql.interceptor;
 
 import com.rbservicios.demo_graphQL.application.security.UserContext;
 import com.rbservicios.demo_graphQL.application.security.JwtValidator;
+import graphql.GraphQLContext;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.graphql.server.WebGraphQlInterceptor;
 import org.springframework.graphql.server.WebGraphQlRequest;
 import org.springframework.graphql.server.WebGraphQlResponse;
@@ -15,6 +18,7 @@ import java.util.Optional;
 public class JwtGraphQLInterceptor implements WebGraphQlInterceptor {
 
     private final JwtValidator jwtValidator;
+    private static final Logger log = LoggerFactory.getLogger(JwtGraphQLInterceptor.class);
 
     public JwtGraphQLInterceptor(JwtValidator jwtValidator) {
         this.jwtValidator = jwtValidator;
@@ -25,27 +29,54 @@ public class JwtGraphQLInterceptor implements WebGraphQlInterceptor {
             WebGraphQlRequest request,
             Chain chain) {
 
-        Optional<UserContext> userContext = Optional.empty();
+        log.info("Processing GraphQL request: {}", request.getDocument());
 
-            String authHeader =
+        UserContext userContext = null;
+
+        String authHeader =
                 request.getHeaders().getFirst(HttpHeaders.AUTHORIZATION);
 
-            if (authHeader != null && authHeader.startsWith("Bearer ")) {
-                String token = authHeader.substring(7);
-                userContext = jwtValidator.validate(token);
-            }
+        if (authHeader != null && authHeader.startsWith("Bearer ")) {
+            String token = authHeader.substring(7);
+            userContext = jwtValidator.validate(token);
+            log.info("UserContext present: {}", userContext.getUserId());
+        } else {
+            log.warn("No Authorization header found or not Bearer token");
+        }
 
-        Optional<UserContext> finalUserContext = userContext;
+        final UserContext finalUserContext = userContext;
 
-        request.configureExecutionInput((executionInput, builder) -> {
-            builder.graphQLContext(ctx -> {
-                        finalUserContext.ifPresent(uc -> ctx.put("userContext", uc)
-                        );
-                    }
+        request.configureExecutionInput((executionInput, builder) ->
+            /*
+            // Crear un nuevo contexto o usar el existente
+            GraphQLContext context = executionInput.getGraphQLContext();
+            GraphQLContext.Builder contextBuilder = GraphQLContext.newContext();
 
+            // Copiar valores existentes
+            context.getKeys().forEach(key ->
+                    contextBuilder.put(key, context.get(key))
             );
-            return builder.build();
-        });
+
+            // Agregar userContext, si existe
+            finalUserContext.ifPresent(uc -> {
+                contextBuilder.put("userContext", uc);
+                log.info("userContext added to GraphQLContext");
+            });
+
+
+            return builder
+                    .graphQLContext(contextBuilder.build())
+                    .build();
+
+             */
+            builder
+                    .graphQLContext(context -> {
+                        if (finalUserContext != null) {
+                            context.put("userContext", finalUserContext);
+                        }
+                    })
+                    .build()
+        );
 
         return chain.next(request);
     }

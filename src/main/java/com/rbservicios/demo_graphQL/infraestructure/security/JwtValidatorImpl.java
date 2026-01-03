@@ -34,10 +34,8 @@ public class JwtValidatorImpl implements JwtValidator {
     }
 
     @Override
-    public Optional<UserContext> validate(String token) {
-
+    public UserContext validate(String token) {
         try {
-
             Claims claims = parser
                     .parseClaimsJws(token)
                     .getBody();
@@ -45,9 +43,9 @@ public class JwtValidatorImpl implements JwtValidator {
             Long userId = claims.get("userId", Long.class);
             String username = claims.getSubject();
 
-            return Optional.of(new UserContext(userId, username));
+            return new UserContext(userId, username);
         } catch (Exception e) {
-            return Optional.empty();
+            return null;
         }
 
 

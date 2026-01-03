@@ -10,4 +10,5 @@ public class DemoGraphQlApplication {
 		SpringApplication.run(DemoGraphQlApplication.class, args);
 	}
 
+
 }

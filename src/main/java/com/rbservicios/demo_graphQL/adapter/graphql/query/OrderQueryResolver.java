@@ -3,19 +3,18 @@ package com.rbservicios.demo_graphQL.adapter.graphql.query;
 import com.rbservicios.demo_graphQL.application.security.UserContext;
 import com.rbservicios.demo_graphQL.adapter.graphql.mapper.OrderGqlMapper;
 import com.rbservicios.demo_graphQL.adapter.graphql.model.OrderGql;
-import com.rbservicios.demo_graphQL.adapter.graphql.resolver.BaseGraphQLResolver;
 import com.rbservicios.demo_graphQL.application.query.port.GetOrdersByUserQuery;
+import graphql.GraphQLContext;
 import graphql.GraphQLException;
-import graphql.schema.DataFetchingEnvironment;
 import org.springframework.graphql.data.method.annotation.Argument;
+import org.springframework.graphql.data.method.annotation.ContextValue;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
 @Controller
-public class OrderQueryResolver extends BaseGraphQLResolver {
+public class OrderQueryResolver {
 
     private final GetOrdersByUserQuery query;
 
@@ -23,26 +22,14 @@ public class OrderQueryResolver extends BaseGraphQLResolver {
         this.query = query;
     }
 
-    /*
-    Por temas de no violar informacion de usuarios debe ser restringida
-    y solo utilizar el metodo de abajo
-
     @QueryMapping
-    public List<OrderGql> ordersByUser(@Argument Long userId) {
-        return query.execute(userId)
-                .stream()
-                .map(OrderGqlMapper::fromDomain)
-                .toList();
-    }
-    */
-    @QueryMapping
-    public List<OrderGql> myOrders(
+    public List<OrderGql> ordersByUser(
             @Argument Long userId,
-            DataFetchingEnvironment env) {
+            GraphQLContext context) {
 
-        UserContext user = getUserContext(env);
+        UserContext userContext = context.get("userContext");
 
-        if (user == null || !user.hasRole("ADMIN")) {
+        if (userContext == null || !userContext.hasRole("USER")) {
             throw new GraphQLException("Unauthorized");
         }
 

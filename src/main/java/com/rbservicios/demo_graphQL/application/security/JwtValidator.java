@@ -4,5 +4,5 @@ import java.util.Optional;
 
 public interface JwtValidator {
 
-    Optional<UserContext> validate(String token);
+    UserContext validate(String token);
 }
