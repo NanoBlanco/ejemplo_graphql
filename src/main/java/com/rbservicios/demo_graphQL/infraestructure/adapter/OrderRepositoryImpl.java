@@ -50,4 +50,14 @@ public class OrderRepositoryImpl implements OrderRepository {
                 .map(OrderMapper::toDomain)
                 .toList();
     }
+
+    @Override
+    public void deleteById(Long orderId) {
+        jpaOrderRepository.deleteById(orderId);
+    }
+
+    @Override
+    public boolean existsById(Long userId) {
+        return jpaOrderRepository.existsById(userId);
+    }
 }

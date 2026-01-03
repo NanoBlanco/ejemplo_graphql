@@ -1,4 +1,4 @@
-package com.rbservicios.demo_graphQL.adapter.graphql.mutation;
+package com.rbservicios.demo_graphQL.adapter.graphql.controller;
 
 import com.rbservicios.demo_graphQL.adapter.graphql.mapper.ProductGqlMapper;
 import com.rbservicios.demo_graphQL.adapter.graphql.model.ProductGql;
@@ -14,13 +14,13 @@ import org.springframework.stereotype.Controller;
 import java.math.BigDecimal;
 
 @Controller
-public class ProductMutationResolver {
+public class ProductController {
 
     private final CreateProductCommand command;
     private final UpdateProductCommand updateCommand;
     private final DeleteProductCommand deleteCommand;
 
-    public ProductMutationResolver(
+    public ProductController(
             CreateProductCommand command,
             UpdateProductCommand updateCommand,
             DeleteProductCommand deleteCommand

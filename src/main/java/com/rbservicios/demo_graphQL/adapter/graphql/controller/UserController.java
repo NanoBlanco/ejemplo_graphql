@@ -1,4 +1,4 @@
-package com.rbservicios.demo_graphQL.adapter.graphql.mutation;
+package com.rbservicios.demo_graphQL.adapter.graphql.controller;
 
 import com.rbservicios.demo_graphQL.adapter.graphql.mapper.UserGqlMapper;
 import com.rbservicios.demo_graphQL.adapter.graphql.model.UserGql;
@@ -12,13 +12,13 @@ import org.springframework.graphql.data.method.annotation.MutationMapping;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class UserMutationResolver {
+public class UserController {
 
     private final CreateUserCommand command;
     private final UpdateUserCommand updateUserCommand;
     private final DeleteUserCommand deleteUserCommand;
 
-    public UserMutationResolver(
+    public UserController(
             CreateUserCommand command,
             UpdateUserCommand updateUserCommand,
             DeleteUserCommand deleteUserCommand

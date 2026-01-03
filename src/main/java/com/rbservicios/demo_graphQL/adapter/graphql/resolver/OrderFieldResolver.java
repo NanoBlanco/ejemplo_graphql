@@ -1,4 +1,4 @@
-package com.rbservicios.demo_graphQL.adapter.graphql.query;
+package com.rbservicios.demo_graphQL.adapter.graphql.resolver;
 
 import com.rbservicios.demo_graphQL.adapter.graphql.mapper.ProductGqlMapper;
 import com.rbservicios.demo_graphQL.adapter.graphql.mapper.UserGqlMapper;
@@ -7,11 +7,9 @@ import com.rbservicios.demo_graphQL.adapter.graphql.model.ProductGql;
 import com.rbservicios.demo_graphQL.adapter.graphql.model.UserGql;
 import com.rbservicios.demo_graphQL.application.query.port.LoadProductsByIdsPort;
 import com.rbservicios.demo_graphQL.application.query.port.LoadUsersByIdsPort;
-import com.rbservicios.demo_graphQL.infraestructure.persistence.mapper.UserMapper;
 import org.springframework.graphql.data.method.annotation.BatchMapping;
 import org.springframework.stereotype.Controller;
 import reactor.core.publisher.Mono;
-import reactor.core.scheduler.Scheduler;
 import reactor.core.scheduler.Schedulers;
 
 import java.util.List;

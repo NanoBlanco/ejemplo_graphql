@@ -1,4 +1,4 @@
-package com.rbservicios.demo_graphQL.adapter.graphql.query;
+package com.rbservicios.demo_graphQL.adapter.graphql.resolver;
 
 import com.rbservicios.demo_graphQL.adapter.graphql.mapper.ProductGqlMapper;
 import com.rbservicios.demo_graphQL.adapter.graphql.model.ProductGql;

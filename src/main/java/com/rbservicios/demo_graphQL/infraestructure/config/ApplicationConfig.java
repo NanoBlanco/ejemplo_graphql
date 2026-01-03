@@ -68,6 +68,11 @@ public class ApplicationConfig {
     }
 
     @Bean
+    DeleteOrderCommand deleteOrderCommand(OrderRepository repository) {
+        return new DeleteOrderUseCase(repository);
+    }
+
+    @Bean
     LoginUseCase loginUseCase(UserRepository repository, JwtTokenProvider jwtTokenProvider) {
         return new LoginUseCase(repository, jwtTokenProvider);
     }

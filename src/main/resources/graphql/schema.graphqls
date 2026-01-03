@@ -33,6 +33,7 @@ type Mutation {
     updateProduct(id: ID!, name: String, price: Float): Product
     deleteProduct(id: ID!): Boolean
     createOrder(productIds: [ID!]!): Order!
+    deleteOrder(id: ID!): Boolean
 
     login(userId: ID!): String!
 }

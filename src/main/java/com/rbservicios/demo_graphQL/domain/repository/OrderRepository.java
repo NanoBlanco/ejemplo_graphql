@@ -8,4 +8,6 @@ public interface OrderRepository {
 
     Order save(Order order);
     List<Order> findByUserId(Long userId);
+    void deleteById(Long orderId);
+    boolean existsById(Long userId);
 }

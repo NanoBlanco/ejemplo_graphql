@@ -1,4 +1,4 @@
-package com.rbservicios.demo_graphQL.adapter.graphql.query;
+package com.rbservicios.demo_graphQL.adapter.graphql.resolver;
 
 import com.rbservicios.demo_graphQL.application.security.UserContext;
 import com.rbservicios.demo_graphQL.adapter.graphql.mapper.OrderGqlMapper;
@@ -7,7 +7,6 @@ import com.rbservicios.demo_graphQL.application.query.port.GetOrdersByUserQuery;
 import graphql.GraphQLContext;
 import graphql.GraphQLException;
 import org.springframework.graphql.data.method.annotation.Argument;
-import org.springframework.graphql.data.method.annotation.ContextValue;
 import org.springframework.graphql.data.method.annotation.QueryMapping;
 import org.springframework.stereotype.Controller;
 
